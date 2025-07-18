@@ -11,7 +11,7 @@ function App() {
     password: "",
   });
 
-  // Fetch all users on page load
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -40,7 +40,7 @@ function App() {
       const res = await axios.post(`${API}/api/users/register`, formData);
       alert(res.data.message || "User added successfully");
       setFormData({ name: "", email: "", password: "" });
-      fetchUsers(); // Refresh the user list
+      fetchUsers(); 
     } catch (error) {
       console.error("Error adding user:", error);
       alert(
@@ -57,7 +57,7 @@ function App() {
     try {
       const res = await axios.delete(`${API}/api/users/${id}`);
       alert(res.data.message || "User deleted successfully");
-      fetchUsers(); // Refresh the list
+      fetchUsers(); 
     } catch (error) {
       console.error("Error deleting user:", error);
       alert("Failed to delete user");

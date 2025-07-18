@@ -1,109 +1,102 @@
-body, html {
+/* General Reset */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page Layout */
+.app {
   min-height: 100vh;
-  justify-content: center;
+  background: linear-gradient(to right, #c6ffdd, #fbd786, #f7797d);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.page {
-  display: flex;
-  justify-content: center;
-  align-items: center;  /* Was flex-start, now truly center vertically */
-  padding: 50px 20px;
-  min-height: 100vh;
-}
-
-
-.container {
+/* Form Container */
+.form-container {
+  background-color: #ffffffdd;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  max-width: 500px;
   width: 100%;
-  max-width: 1000px; /* Was 800px, now wider */
-  min-height: 100px;  /* Added minimum height */
-  background: #ffffffee;
-  border-radius: 20px;
-  padding: 40px 50px; /* More padding */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-
-h1 {
+.form-container h1 {
+  color: #6a1b9a;
   text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 2.5rem;
+  margin-bottom: 20px;
 }
 
-.form {
-  display: grid;
-  gap: 15px;
-  margin-bottom: 30px;
-}
-
-input {
-  padding: 12px 15px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-}
-
-button {
+/* Input Fields */
+.input-field {
+  width: 100%;
   padding: 12px;
-  font-size: 1rem;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #6a1b9a;
+  outline: none;
+  background-color: #f3e5f5;
+}
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #6a1b9a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  background-color: #0077cc;
-  color: white;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #005fa3;
+.submit-btn:hover {
+  background-color: #4a0072;
 }
 
+/* User List */
 .user-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  background-color: #ffffffcc;
+  padding: 25px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  max-width: 700px;
+  width: 100%;
 }
 
-.user-card {
-  display: flex;
-  justify-content: space-between;
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+.user-list h2 {
+  margin-bottom: 15px;
+  color: #2e2e2e;
+  text-align: center;
 }
 
-.user-card:hover {
-  transform: scale(1.01);
+.user-list ul {
+  list-style: none;
 }
 
-.info p {
-  margin: 6px 0;
-  font-size: 1rem;
+.user-list li {
+  background: #f1f8e9;
+  padding: 14px 20px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border-left: 5px solid #8bc34a;
+  transition: transform 0.2s ease;
 }
 
-.actions button {
-  margin-left: 10px;
-}
-
-button.edit {
-  background-color: #ffc107;
-}
-
-button.edit:hover {
-  background-color: #e0a800;
-}
-
-button.delete {
-  background-color: #dc3545;
-}
-
-button.delete:hover {
-  background-color: #c82333;
+.user-list li:hover {
+  transform: scale(1.02);
 }

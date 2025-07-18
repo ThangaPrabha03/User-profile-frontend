@@ -50,6 +50,20 @@ function App() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Are you sure you want to delete this user?");
+    if (!confirm) return;
+
+    try {
+      const res = await axios.delete(`${API}/api/users/${id}`);
+      alert(res.data.message || "User deleted successfully");
+      fetchUsers(); // Refresh the list
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user");
+    }
+  };
+
   return (
     <div className="app">
       <div className="form-container">
@@ -94,6 +108,12 @@ function App() {
             {users.map((user) => (
               <li key={user._id}>
                 <strong>{user.name}</strong> – {user.email}
+                <button
+                  onClick={() => handleDelete(user._id)}
+                  className="delete-btn"
+                >
+                  Delete
+                </button>
               </li>
             ))}
           </ul>

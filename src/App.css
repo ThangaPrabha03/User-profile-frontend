@@ -109,6 +109,24 @@ h2 {
 .user-card button:hover {
   background-color: #b71c1c;
 }
+.delete-btn {
+  background-color: #6a1b9a; /* Same as Add User button */
+  color: white;
+  border: none;
+  padding: 4px 8px;           /* Smaller padding for a compact button */
+  font-size: 0.75rem;         /* Smaller font */
+  border-radius: 6px;
+  cursor: pointer;
+  width: 20%;
+  transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+  background-color: #4a148c;  /* Hover effect same as Add User */
+}
+
+
+
 
 /* Responsive */
 @media (max-width: 600px) {

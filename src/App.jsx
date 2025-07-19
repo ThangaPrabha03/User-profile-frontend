@@ -1,123 +1,72 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import './App.css';
+
+const API = import.meta.env.VITE_API_URL;
 
 function App() {
-  const API = import.meta.env.VITE_API_URL;
   const [users, setUsers] = useState([]);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const [form, setForm] = useState({ name: '', age: '', email: '', mobile: '' });
 
   const fetchUsers = async () => {
     try {
       const res = await axios.get(`${API}/api/users`);
       setUsers(res.data);
-    } catch (error) {
-      console.error("Error fetching users:", error);
+    } catch (err) {
+      console.error('Error fetching users:', err.message);
     }
   };
 
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.password) {
-      alert("Please fill in all fields");
-      return;
-    }
-
     try {
-      const res = await axios.post(`${API}/api/users/register`, formData);
-      alert(res.data.message || "User added successfully");
-      setFormData({ name: "", email: "", password: "" });
-      fetchUsers(); 
-    } catch (error) {
-      console.error("Error adding user:", error);
-      alert(
-        error.response?.data?.message ||
-          "An error occurred while adding the user."
-      );
+      await axios.post(`${API}/api/users`, form);
+      setForm({ name: '', age: '', email: '', mobile: '' });
+      fetchUsers();
+    } catch (err) {
+      alert('An error occurred while adding the user.');
+      console.error(err.response?.data || err.message);
     }
   };
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm("Are you sure you want to delete this user?");
-    if (!confirm) return;
-
     try {
-      const res = await axios.delete(`${API}/api/users/${id}`);
-      alert(res.data.message || "User deleted successfully");
-      fetchUsers(); 
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      alert("Failed to delete user");
+      await axios.delete(`${API}/api/users/${id}`);
+      fetchUsers();
+    } catch (err) {
+      console.error('Error deleting user:', err.message);
     }
   };
 
   return (
-    <div className="app">
-      <div className="form-container">
-        <h1>Manage Your Profiles</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
-            className="input-field"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            className="input-field"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter a password"
-            value={formData.password}
-            onChange={handleChange}
-            className="input-field"
-          />
-          <button type="submit" className="submit-btn">
-            Add User
-          </button>
-        </form>
-      </div>
+    <div className="app-container">
+      <h1>User Profile Manager</h1>
+      <form onSubmit={handleSubmit} className="form">
+        <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required />
+        <input name="age" value={form.age} onChange={handleChange} placeholder="Age" type="number" required />
+        <input name="email" value={form.email} onChange={handleChange} placeholder="Email" required />
+        <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile" required />
+        <button type="submit">Add User</button>
+      </form>
 
       <div className="user-list">
-        <h2>All Users</h2>
-        {users.length === 0 ? (
-          <p>No users found.</p>
-        ) : (
-          <ul>
-            {users.map((user) => (
-              <li key={user._id}>
-                <strong>{user.name}</strong> – {user.email}
-                <button
-                  onClick={() => handleDelete(user._id)}
-                  className="delete-btn"
-                >
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+        {users.map((u) => (
+          <div key={u._id} className="user-card">
+            <h3>{u.name}</h3>
+            <p><strong>Age:</strong> {u.age}</p>
+            <p><strong>Email:</strong> {u.email}</p>
+            <p><strong>Mobile:</strong> {u.mobile}</p>
+            <button onClick={() => handleDelete(u._id)}>Delete</button>
+          </div>
+        ))}
       </div>
     </div>
   );

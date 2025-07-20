@@ -5,6 +5,23 @@ body, html {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #a8e063, #f0f9ff);
+  min-height: 100vh;
+  overflow-y: auto;
+}
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+html {
+  scroll-behavior: smooth;
+}
+
 
 /* Background Gradient Full Screen */
 body {

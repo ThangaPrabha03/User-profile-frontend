@@ -56,20 +56,7 @@ function App() {
         <input name="mobile" value={form.mobile} onChange={handleChange} placeholder="Mobile" required />
         <button type="submit">Add User</button>
       </form>
-
-      <div className="user-list">
-  {users.map((u) => (
-    <div key={u._id} className="user-card">
-      <p><strong>Name:</strong> {u.name}</p>
-      <p><strong>Age:</strong> {u.age}</p>
-      <p><strong>Email:</strong> {u.email}</p>
-      <p><strong>Mobile:</strong> {u.mobile}</p>
-      <button onClick={() => handleDelete(u._id)}>Delete</button>
-    </div>
-  ))}
-</div>
-
-    </div>
+      </div>
   );
 }
 

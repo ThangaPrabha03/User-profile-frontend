@@ -1,10 +1,18 @@
 /* Reset & base styles */
-body, html {
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  min-height: 100%;
+  height: auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #d4fc79, #96e6a1, #fddb92, #d1fdff, #ff758c);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  overflow-x: hidden;
 }
+
+/* 🔥 REMOVE this: Do NOT center body with flex */
+
 
 
 /* Background Gradient Full Screen */
